@@ -18,6 +18,7 @@ libvirt + kvm
 
 * +apt-get install libvirt-bin virt-top qemu-kvm debootstrap dbus virtinst netcat-openbsd bridge-utils+
 
+* remove all additional ips from /e/n/i
 
 -------------------------------------
 auto eth0
