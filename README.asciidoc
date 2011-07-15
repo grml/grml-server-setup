@@ -291,12 +291,11 @@ domain ip6 {
 serial console
 ==============
 
-To activate sol for the BMC/IMPI enable gettys for ttyS0/ttyS1. Adjust /etc/inittab
+To activate sol for the BMC/IMPI enable gettys for ttyS0. Adjust /etc/inittab
 and make sure it contains
 
 ---------------------------------
 T0:23:respawn:/sbin/getty -L ttyS0 9600 vt100
-T1:23:respawn:/sbin/getty -L ttyS1 9600 vt100
 ---------------------------------
 
 
