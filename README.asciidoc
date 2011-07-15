@@ -303,10 +303,10 @@ T1:23:respawn:/sbin/getty -L ttyS1 9600 vt100
 Configure ipmi
 ==============
 
-Show lan configuration: +ipmitool lan print+
-Set ip address: +ipmitool lan set 1 ipaddr $IPADDR+
-Set netmask: +ipmitool lan set 1 netmask 255.255.255.248+
-Set default gw: +ipmitool lan set 1 defgw ipaddr $GW+
+* Show lan configuration: +ipmitool lan print+
+* Set ip address: +ipmitool lan set 1 ipaddr $IPADDR+
+* Set netmask: +ipmitool lan set 1 netmask 255.255.255.248+
+* Set default gw: +ipmitool lan set 1 defgw ipaddr $GW+
 
 Show user list: +ipmitool user list 1+
 Create a new user:
