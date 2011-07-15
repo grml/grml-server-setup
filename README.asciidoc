@@ -277,6 +277,17 @@ domain ip6 {
 ----------------------------------
 
 
+3ware tools
+===========
+
+----------------------------------
+# echo 'deb http://jonas.genannt.name/debian squeeze restricted' >
+    /etc/apt/sources.list.d/3dm2.list
+# wget -O - http://jonas.genannt.name/debian/jonas_genannt.pub | apt-key
+  add -+
+# apt-get update ; apt-get install 3ware-cli-binary 3ware-3dm2-binary
+---------------------------------
+
 collectd
 =========
 
