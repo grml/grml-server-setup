@@ -20,6 +20,7 @@ libvirt + kvm
 
 * remove all additional ips from /e/n/i
 
+./etc/network/interface
 -------------------------------------
 auto eth0
 iface eth0 inet manual
@@ -44,6 +45,7 @@ LDAP
 * Remove old ldap db: +rm /var/lib/ldap/*(db*|bdb|log*|alock)+
 * Remove slapd.d madness: +rm -rf /etc/ldap/slapd.d+
 
+./etc/ldap/slapd.conf
 ------------------------------------
 # This is the main slapd configuration file. See slapd.conf(5) for more
 # info on the configuration options.
@@ -160,8 +162,7 @@ access to *
 
 ------------------------------------
 
-* initalize ldap db
-
+.initalize ldap db
 -----------------------------------
 slapadd -c < EOF
 
