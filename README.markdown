@@ -1,10 +1,40 @@
+make apt sane
+=============
+
+--------------------------------------
+echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/99norecommends
+--------------------------------------
+
+
+lvm
+===
+
+* create a partition with partition type 8E (linux lvm)
+* +apt-get install lvm2+
+* Add new volumegroup +vgcreate vg0 /dev/sda6+
+
 libvirt + kvm
 =============
 
-vm
-==
+* +apt-get install libvirt-bin virt-top qemu-kvm debootstrap dbus virtinst netcat-openbsd bridge-utils+
 
 
+-------------------------------------
+auto eth0
+iface eth0 inet manual
+
+auto br0
+iface br0 inet static
+  address 83.246.69.170
+  netmask 255.255.255.248
+  broadcast 83.246.69.175
+  gateway 83.246.69.169
+  bridge_ports eth0
+  bridge_fd 9
+  bridge_hello 2
+  bridge_maxage 12
+  bridge_stp off
+-------------------------------------
 LDAP
 ====
 
