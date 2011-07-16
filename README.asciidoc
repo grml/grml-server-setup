@@ -16,17 +16,21 @@ lvm
 libvirt + kvm
 =============
 
-* +apt-get install libvirt-bin virt-top qemu-kvm debootstrap dbus virtinst netcat-openbsd bridge-utils+
+* +apt-get install libvirt-bin virt-top qemu-kvm debootstrap dbus virtinst
+netcat-openbsd bridge-utils vde2+
 
 * remove all additional ips from /e/n/i
+
+* We use vde2 to create a virtual switch for an internal network and bridge the tap
+  device intern to the bridge intbr
 
 ./etc/network/interface
 -------------------------------------
 auto eth0
 iface eth0 inet manual
 
-auto br0
-iface br0 inet static
+auto extbr
+iface extbr inet static
   address 83.246.69.170
   netmask 255.255.255.248
   broadcast 83.246.69.175
@@ -36,6 +40,21 @@ iface br0 inet static
   bridge_hello 2
   bridge_maxage 12
   bridge_stp off
+
+auto intbr
+iface intbr inet static
+  address 10.0.3.1
+  netmask 255.255.255.0
+  bridge_fd 9
+  bridge_hello 2
+  bridge_maxage 12
+  bridge_stp off
+  bridge_ports intern
+
+auto intern
+iface intern inet manual
+    vde2-switch -t intern
+
 -------------------------------------
 
 LDAP
