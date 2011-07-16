@@ -81,6 +81,11 @@ include         /etc/ldap/schema/cosine.schema
 include         /etc/ldap/schema/nis.schema
 include         /etc/ldap/schema/inetorgperson.schema
 
+#ssl support
+TLSCACertificateFile /etc/ldap/ssl/ca.crt
+TLSCertificateFile /etc/ldap/ssl/server.crt
+TLSCertificateKeyFile /etc/ldap/ssl/server.key
+
 
 # Where the pid file is put. The init.d script
 # will not stop the server if you change this.
