@@ -341,6 +341,56 @@ ipmitool user set password 6 PASSWORD
 
 Test the connection: +ipmitool -I lanplus -H $IP -U mru -a sol activate+
 
+user management
+===============
+
+Usermanagement is done with LDAP and cpu.
+
+.cpu configuration
+------------------------------
+[GLOBAL]
+DEFAULT_METHOD	= ldap
+#CRACKLIB_DICTIONARY = /var/cache/cracklib/cracklib_dict
+
+[LDAP]
+LDAP_URI                = ldap://localhost
+BIND_DN                 = cn=admin,dc=grml,dc=org 
+BIND_PASS               = XXXXXXXXX
+USER_BASE               = ou=People,dc=grml,dc=org
+GROUP_BASE              = ou=Group,dc=grml,dc=org
+USER_OBJECT_CLASS	= account,posixAccount,shadowAccount,top
+GROUP_OBJECT_CLASS	= posixGroup,top
+USER_FILTER	= (objectClass=posixAccount)
+GROUP_FILTER	= (objectClass=posixGroup)
+USER_CN_STRING	= uid
+GROUP_CN_STRING = cn
+SKEL_DIR	= /etc/skel
+DEFAULT_SHELL 	= /usr/bin/zsh
+HOME_DIRECTORY	= /home
+MAX_UIDNUMBER = 10000
+MIN_UIDNUMBER = 1000
+MAX_GIDNUMBER = 10000
+MIN_GIDNUMBER = 1000
+ID_MAX_PASSES = 1000
+# Whether each user should have its own group created or not
+USERGROUPS = yes
+# If you change usergroup set this to the default group a user should have
+#USERS_GID = 100
+RANDOM = "false"
+PASSWORD_FILE = "/etc/passfile"
+SHADOW_FILE = "/etc/shadowfile"
+HASH = "md5"
+SHADOWLASTCHANGE	= 11192
+SHADOWMAX		= 99999
+SHADOWWARING		= 7
+SHADOWEXPIRE		= -1
+SHADOWFLAG		= 134538308
+SHADOWMIN		= -1
+SHADOWINACTIVE		= -1
+------------------------------
+
+Adding users is simple: +cpu useradd -p formorer+
+
 collectd
 =========
 
