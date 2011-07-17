@@ -64,7 +64,7 @@ iface intern inet manual
 
 Enable ksm
 ----------
-For details about KSM see 
+For details about KSM see
 http://www.kernel.org/doc/Documentation/vm/ksm.txt[ksm.txt]
 
 ------------------------------
