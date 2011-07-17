@@ -1,3 +1,8 @@
+server documentation for grml
+=============================
+grml team <info@grml.org>
+v0.0, July 2011
+
 make apt sane
 =============
 
