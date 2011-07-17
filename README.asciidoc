@@ -4,7 +4,7 @@ grml team <info@grml.org>
 v0.0, July 2011
 
 make apt sane
-=============
+-------------
 
 --------------------------------------
 echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/99norecommends
@@ -12,14 +12,14 @@ echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/99norecommends
 
 
 lvm
-===
+---
 
 * create a partition with partition type 8E (linux lvm)
 * +apt-get install lvm2+
 * Add new volumegroup +vgcreate vg0 /dev/sda6+
 
 libvirt + kvm
-=============
+-------------
 
 * +apt-get install libvirt-bin virt-top qemu-kvm debootstrap dbus virtinst
 netcat-openbsd bridge-utils vde2+
@@ -63,7 +63,7 @@ iface intern inet manual
 -------------------------------------
 
 Enable ksm
-----------
+~~~~~~~~~~
 For details about KSM see
 http://www.kernel.org/doc/Documentation/vm/ksm.txt[ksm.txt]
 
@@ -75,7 +75,7 @@ echo "kernel/mm/ksm/run = 1" >> /etc/sysfs.conf
 
 
 LDAP
-====
+----
 
 * +apt-get install slapd ldapvi+
 * Remove old ldap db: +rm /var/lib/ldap/*(db*|bdb|log*|alock)+
@@ -239,7 +239,7 @@ structuralObjectClass: organizationalUnit
 * start slapd
 
 host firewall
-=============
+-------------
 
 * +apt-get install ferm+
 
@@ -319,7 +319,7 @@ domain ip6 {
 
 
 3ware tools
-===========
+-----------
 
 ----------------------------------
 # echo 'deb http://jonas.genannt.name/debian squeeze restricted' >
@@ -330,7 +330,7 @@ domain ip6 {
 ---------------------------------
 
 serial console
-==============
+--------------
 
 To activate sol for the BMC/IMPI enable gettys for ttyS0. Adjust /etc/inittab
 and make sure it contains
@@ -341,7 +341,7 @@ T0:23:respawn:/sbin/getty -L ttyS0 9600 vt100
 
 
 Configure ipmi
-==============
+--------------
 
 * Show lan configuration: +ipmitool lan print+
 * Set ip address: +ipmitool lan set 1 ipaddr $IPADDR+
@@ -359,7 +359,7 @@ ipmitool user set password 6 PASSWORD
 Test the connection: +ipmitool -I lanplus -H $IP -U mru -a sol activate+
 
 user management
-===============
+---------------
 
 Usermanagement is done with LDAP and cpu.
 
@@ -409,13 +409,13 @@ SHADOWINACTIVE		= -1
 Adding users is simple: +cpu useradd -p formorer+
 
 puppet
-======
+------
 
 the puppet configuration is on father. 
 
 
 client configuration
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 Take care that father.grml.org is resovable (/etc/hosts.conf)
 .puppet.conf
@@ -439,5 +439,5 @@ Run it again and check for errors. (It may take up to three runs until
 everything is ok).
 
 collectd
-=========
+--------
 
