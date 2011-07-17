@@ -57,6 +57,18 @@ iface intern inet manual
 
 -------------------------------------
 
+Enable ksm
+----------
+For details about KSM see 
+http://www.kernel.org/doc/Documentation/vm/ksm.txt[ksm.txt]
+
+------------------------------
+apt-get install sysfsutils
+echo "kernel/mm/ksm/run = 1" >> /etc/sysfs.conf
+/etc/init.d/sysfsutils start
+------------------------------
+
+
 LDAP
 ====
 
@@ -391,16 +403,35 @@ SHADOWINACTIVE		= -1
 
 Adding users is simple: +cpu useradd -p formorer+
 
-Enabling kernel samepage merging
-=================================
-For details about KSM see http://www.kernel.org/doc/Documentation/vm/ksm.txt
+puppet
+======
 
-------------------------------
-apt-get install sysfsutils
-echo "kernel/mm/ksm/run = 1" >> /etc/sysfs.conf
-/etc/init.d/sysfsutils start
-------------------------------
+the puppet configuration is on father. 
 
+
+client configuration
+--------------------
+
+Take care that father.grml.org is resovable (/etc/hosts.conf)
+.puppet.conf
+----------------------------------------------
+[main]
+pluginsync=true
+server = father.grml.org
+logdir=/var/log/puppet
+vardir=/var/lib/puppet
+ssldir=/var/lib/puppet/ssl
+rundir=/var/run/puppet
+factpath=$vardir/lib/facter
+templatedir=$confdir/templates
+----------------------------------------------
+
+run + puppetd -w 5 --debug -t+ afterwards and sign the request on father:
+w
++puppetca --sign hostname+.
+
+Run it again and check for errors. (It may take up to three runs until
+everything is ok).
 
 collectd
 =========
