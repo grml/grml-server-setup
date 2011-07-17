@@ -391,6 +391,17 @@ SHADOWINACTIVE		= -1
 
 Adding users is simple: +cpu useradd -p formorer+
 
+Enabling kernel samepage merging
+=================================
+For details about KSM see http://www.kernel.org/doc/Documentation/vm/ksm.txt
+
+------------------------------
+apt-get install sysfsutils
+echo "kernel/mm/ksm/run = 1" >> /etc/sysfs.conf
+/etc/init.d/sysfsutils start
+------------------------------
+
+
 collectd
 =========
 
