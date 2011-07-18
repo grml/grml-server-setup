@@ -339,6 +339,16 @@ and make sure it contains
 T0:23:respawn:/sbin/getty -L ttyS0 9600 vt100
 ---------------------------------
 
+grub
+~~~~
+To send the grub output to the serial console as well as the vga console edit
+/etc/default/grub and add the following lines:
+
+---------------------------------
+GRUB_TERMINAL="serial console"
+GRUB_SERIAL_COMMAND="serial --speed=115200 --unit=0 --word=8 --parity=no --stop=1"
+---------------------------------
+
 
 Configure ipmi
 --------------
@@ -411,7 +421,7 @@ Adding users is simple: +cpu useradd -p formorer+
 puppet
 ------
 
-the puppet configuration is on father. 
+the puppet configuration is on father.
 
 
 client configuration
