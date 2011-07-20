@@ -1,0 +1,33 @@
+mail.grml.org documentation
+===========================
+grml team <info@grml.org>
+v0.0, July 2011
+
+postfix
+-------
+
+postfix has a fairly common setup (except of amavis and mailman which is shown below).
+The internal network +10.0.3.0/24+ has been added to +mynetworks+ so that
+every vm and father is able to send mail via +10.0.3.2+.
+
+Postfix is sasl enabled and the ca and certs can be found at +/etc/ssl/+. (See
+the +smtpd_tls_*+ parameters. SASL authentication is happending against
+Dovecots auth server (+smtpd_sasl_type = dovecot+, +smtpd_sasl_path =
+private/auth+). SASL authenticated users are able to relay via
++mail.grml.org+.
+
+The mailserver is directly responsible for mail.grml.org and
+ml.grml.org (where mailman generates alias maps for the mailinglists).
+
+E-Mails directed to a local user (mika and +user+@mail.grml.org). Are
+processed by dovecots deliver (+mailbox_command = /usr/lib/dovecot/deliver+)
+and are placed in $HOME/Maildir.
+
+E-Mails to grml.org are handled by a virtual domain map which is located in
++/etc/postfix/virtual+. The map is a hash map, so don't forget to execute
++postmap /etc/postfix/virtual+ afterwards. If you want to add a new virtual
+domain add it to the list in +/etc/postfix/virtual_domains+ (no map needed).
+Add add the entrys to +/etc/postfix/virtual+. If you don't want to add it into
+the same file add a new virtual_alias_map to +virtual_alias_maps+.
+
+
