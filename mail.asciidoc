@@ -19,7 +19,7 @@ private/auth+). SASL authenticated users are able to relay via
 The mailserver is directly responsible for mail.grml.org and
 ml.grml.org (where mailman generates alias maps for the mailinglists).
 
-E-Mails directed to a local user (mika and +user+@mail.grml.org). Are
+E-Mails directed to a local user (mika and +user+@mail.grml.org) are
 processed by dovecots deliver (+mailbox_command = /usr/lib/dovecot/deliver+)
 and are placed in $HOME/Maildir.
 
@@ -30,4 +30,43 @@ domain add it to the list in +/etc/postfix/virtual_domains+ (no map needed).
 Add add the entrys to +/etc/postfix/virtual+. If you don't want to add it into
 the same file add a new virtual_alias_map to +virtual_alias_maps+.
 
+amavsid-new (spam and anti-virus)
+---------------------------------
+
+amavisd-new is integrated into postfix via lmtp and +content_filter+.
+The amavisd-new postfix docs (+/usr/share/doc/amavisd-new/README.postfix.gz+)
+contain the glorious details.
+
+---------------------------------------------------------------
+main.cf:
+
+content_filter=amavisfeed:[127.0.0.1]:10024
+
+master.cf:
+
+amavisfeed unix    -       -       n        -      2     lmtp
+  -o lmtp_data_done_timeout=1200
+  -o lmtp_send_xforward_command=yes
+  -o lmtp_tls_note_starttls_offer=no
+
+127.0.0.1:10025 inet n    -       n       -       -     smtpd
+     -o content_filter=
+     -o smtpd_delay_reject=no
+     -o smtpd_client_restrictions=permit_mynetworks,reject
+     -o smtpd_helo_restrictions=
+     -o smtpd_sender_restrictions=
+     -o smtpd_recipient_restrictions=permit_mynetworks,reject
+     -o smtpd_data_restrictions=reject_unauth_pipelining
+     -o smtpd_end_of_data_restrictions=
+     -o smtpd_restriction_classes=
+     -o mynetworks=127.0.0.0/8
+---------------------------------------------------------------
+
+The whole amavisd-new configuration happens in +/etc/amavis/conf.d/50-user+. Please
+don't touch one of the other files. Amavisd-new uses clamav-daemon for AV scanning, to make this
+happen clamav needs to be added to the amavis group: +adduser clamav amavis+.
+
+Quarantine for +bad headers+ and +spam+ is disabled. The quarantine for virus is in +/var/lib/amavis/virusmails+.
+Spam messages get headers and a +***SPAM***+ Subject. Banning of filename extensions and types is disabled (+$banned_filename_re = undef;+). For spamassassin fine tuning see the $sa_* parameters in +50-user+. Spamassassin itself is currently a standard installation without any
+further tuning.
 
