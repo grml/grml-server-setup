@@ -460,3 +460,16 @@ On deb.grml.org:
 ----------------------------------
 # apt-get install dpkg-dev
 ----------------------------------
+
+
+
+repos.grml.org
+--------------
+
+----------------------------------
+# apt-get install gitolite gitweb openbsd-inetd
+# echo git stream tcp nowait gitdaemon /usr/bin/git git \
+daemon --verbose --inetd --base-path=/srv/git/repositories \
+/srv/git/repositories >> /etc/inetd
+----------------------------------
+
