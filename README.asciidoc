@@ -416,6 +416,7 @@ SHADOWINACTIVE		= -1
 ------------------------------
 
 Adding users is simple: +cpu useradd -p formorer+
+Add user to whell group: +cpu usermod -G wheel formorer+
 
 puppet
 ------
