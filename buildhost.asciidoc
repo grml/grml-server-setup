@@ -1,0 +1,45 @@
+Grml-Live Build system
+----------------------
+
+  adduser grml-live-git
+
+  visudo # -> add:
+    Cmnd_Alias DEBIAN = /usr/bin/apt-get, /usr/bin/dpkg, /usr/bin/aptitude
+    grml-live-git ALL=NOPASSWD: DEBIAN
+
+  apt-get install dpkg-dev git-buildpackage fakeroot debhelper gcc build-essential asciidoc xsltproc docbook-xsl
+
+  apt-get install dnsmasq # for working network inside chroots
+
+  apt-get install squashfs-tools=1:4.2-4~bpo60+1
+  apt-get install grml-live grml-live-addons grml-live-buildd grml-live-db
+  lvcreate -L 40G -n daily system
+  mkfs.ext4 /dev/mapper/system-daily
+  mkdir /srv/daily
+  mount /dev/mapper/system-daily /srv/daily
+
+  cat >> /etc/fstab << EOF
+  /dev/mapper/system-daily /srv/daily ext4 defaults 0 0
+  EOF
+
+  vim /etc/grml/grml-buildd.conf
+
+  su - grml-live-git # then execute:
+
+    git clone git://git.grml.org/grml-live.git grml-live.git
+    cd /home/grml-live-git/grml-live.git/ && env AUTOBUILD=1 scripts/release_helper.sh >/home/grml-live-git/grml-live-build.log
+    crontab -e -> add:
+     30 00 * * * cd /home/grml-live-git/grml-live.git/ && env AUTOBUILD=1 scripts/release_helper.sh >/home/grml-live-git/grml-live-build.log
+
+  cat > /etc/apt/sources.list.d/grml-live.list << EOF
+  deb file:/home/grml-live-git/grml-live.build-area/ ./
+  EOF
+
+  cd /etc/grml/fai/config
+  mkdir basefiles
+  cd basefiles
+  wget http://daily.grml.org/base.tgz http://daily.grml.org/base64.tgz
+  sha1sum *tgz
+  mv base.tgz I386.tar.gz
+  mv base64.tgz AMD64.tar.gz
+  cd /etc ; git commit -m 'initial grml-live buildd stuff'
