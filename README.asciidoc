@@ -474,3 +474,21 @@ daemon --verbose --inetd --base-path=/srv/git/repositories \
 /srv/git/repositories >> /etc/inetd
 ----------------------------------
 
+
+bittorrent
+----------
+
+we use bttrack and btlaunchmanycursed for bittorrent distribution. Both is
+currently located on web.grml.org. bttrack is supervised by supervisor
+(http://supervisord.org/) see `/etc/supervisor/conf.d/btracker.conf` for the
+current configuration. btlaunchanycurses is started via @reboot crontab from
+the tracker user:
+
+---------------------------------
+crontab -l |grep reboot
+@reboot  /usr/bin/tmux new-session -s bttrack  "/usr/bin/btlaunchmanycurses
+/var/www/ftp-master.grml.org/"
+--------------------------------
+
+Both use `/var/www/ftp-master.grml.org/` as sourcedir for torrent seeding and allowed
+torrents in the tracker.
