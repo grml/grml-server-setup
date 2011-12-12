@@ -478,17 +478,13 @@ daemon --verbose --inetd --base-path=/srv/git/repositories \
 bittorrent
 ----------
 
-we use bttrack and btlaunchmanycursed for bittorrent distribution. Both is
+we use bttrack and transmission-daemon for bittorrent distribution. Both is
 currently located on web.grml.org. bttrack is supervised by supervisor
 (http://supervisord.org/) see `/etc/supervisor/conf.d/btracker.conf` for the
-current configuration. btlaunchanycurses is started via @reboot crontab from
-the tracker user:
+current configuration. transmission-daemon is started from it's init script.
 
----------------------------------
-crontab -l |grep reboot
-@reboot  /usr/bin/tmux new-session -s bttrack  "/usr/bin/btlaunchmanycurses
-/var/www/ftp-master.grml.org/"
---------------------------------
+Both use `/home/tracker/torrents/` as sourcedir for torrent seeding and allowed
+torrents in the tracker. This directory is filled with symlinks to the real
+files because of shortcomings in current BitTorrent software which limits
+the usefulness of subdirectories.
 
-Both use `/var/www/ftp-master.grml.org/` as sourcedir for torrent seeding and allowed
-torrents in the tracker.
