@@ -488,3 +488,21 @@ torrents in the tracker. This directory is filled with symlinks to the real
 files because of shortcomings in current BitTorrent software which limits
 the usefulness of subdirectories.
 
+
+mirrors
+-------
+
+mirrors are configured in Mirrors.masterlist which is located in the
+grml-mirrors repository. The format of the file should be more or less self
+explanary. You can use any other entry as template. Please don't broke that
+file as several other files are generated from that list.
+
+We generate the following other files from the masterlist:
+
+- mirmon config (`/etc/mirmon/mirror.list`). mirmon runs
+  (`/usr/local/bin/run_mirmon`) every 15 minutes and
+  calls `/usr/local/src/grml-mirrors/masterlist2mirmon`) after a git pull.
+- after mirmon runs, `/usr/local/bin/generate_mirror_map` generates the apache
+  `/etc/apache2/grml.map` that drives the geoip mirror redirector.
+
+The state of our mirrors can be checked via http://mirror.grml.org/.
