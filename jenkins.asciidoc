@@ -1,10 +1,13 @@
 jenkins.grml.org documentation
 ==============================
 Grml team <info@grml.org>
-v0.0, July 2011
+v0.0, Jan 2012
 
 Installation
 ------------
+
+Jenkins package
+~~~~~~~~~~~~~~~
 
   cat > /etc/apt/sources.list.d/jenkins.list << EOF
   deb http://pkg.jenkins-ci.org/debian binary/
@@ -13,5 +16,129 @@ Installation
   wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
   apt-get update
   apt-get install jenkins
+
+Jenkins plugins
+~~~~~~~~~~~~~~~
+
+  wget -O default.js http://updates.jenkins-ci.org/update-center.json
+  sed '1d;$d' default.js > default.json
+  apt-get install curl
+  curl -X POST -H "Accept: application/json" -d @default.json http://localhost:8080/updateCenter/byId/default/postBack --verbose
+  java -jar jenkins-cli.jar -s http://localhost:8080/ login --username $USER --password $PASSWORD
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin git
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin build-timeout
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin github
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin promoted-builds
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin backup
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin ruby-runtime
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin artifactdeployer
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin ircbot
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin configurationslicing
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin dashboard-view
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin copyartifact
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin jobConfigHistory
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin disk-usage
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin ws-cleanup
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin sidebar-link
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin grml-live.hpi
+  /etc/init.d/jenkins restart
+
+jenkins-debian-glue
+~~~~~~~~~~~~~~~~~~~
+
+  apt-get install cowbuilder devscripts dpkg-dev git-buildpackage fakeroot debhelper reprepro
+  dpkg -i jenkins-debian-glue_0.0.1_all.deb
+
+  su - jenkins
+  git config --global user.name "Grml Jenkins User"
+  git config --global user.email "jenkins@grml.org"
+
+  mkdir /srv/repository
+  chown jenkins /srv/repository
+
+  # installing .gnupg from old host to /var/lib/jenkins
+
+  mkdir /etc/jenkins
+  cp /usr/share/jenkins-debian-glue/examples/debian_glue /etc/jenkins/debian_glue
+  $EDITOR /etc/jenkins/debian_glue # set KEY_ID=52D4A654
+
+Nginx
+~~~~~
+
+  apt-get install nginx
+
+  ln -s /srv/repository /srv/debian
+  cat > /etc/nginx/sites-available/default << EOF
+  server {
+          listen   80;
+          listen   [::]:80 default ipv6only=on;
+
+          server_name ci.grml.org;
+          access_log  /var/log/nginx/jenkins_http.access.log;
+
+          location /debian {
+                  root   /srv;
+                  autoindex on;
+          }
+
+  #        location / {
+  #                rewrite ^ https://ci.grml.org$request_uri? permanent;
+  #        }
+
+          location / {
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto https;
+              proxy_set_header Host $http_host;
+              proxy_pass http://ci.grml.org:8080/;
+              #proxy_redirect http://ci.grml.org/ https://ci.grml.org/;
+          }
+  }
+
+  server {
+          listen   443;
+          listen   [::]:443 default ipv6only=on;
+
+          server_name  ci.grml.org;
+          access_log  /var/log/nginx/jenkins_https.access.log;
+
+          ssl on;
+          ssl_certificate  /etc/nginx/ssl/server.crt;
+          ssl_certificate_key  /etc/nginx/ssl/server.key;
+          ssl_session_timeout  5m;
+          # openssl ciphers -v HIGH:\!ADH:\!DH:\!3DES:\!MD5
+          ssl_ciphers HIGH:!ADH:!DH:!3DES:!MD5;
+          ssl_prefer_server_ciphers on;
+
+          location /debian {
+                  root   /srv;
+                  autoindex on;
+          }
+
+          location / {
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto https;
+              proxy_set_header Host $http_host;
+              proxy_pass http://ci.grml.org:8080/;
+              proxy_redirect http://ci.grml.org/ https://ci.grml.org/;
+          }
+  }
+  EOF
+
+SSL-Setup:
+
+  mkdir /etc/nginx/ssl
+  cd /etc/nginx/ssl
+  openssl genrsa -des3 -out server.key 1024
+  openssl req -new -key server.key -out server.csr
+  cp server.key server.key.org
+  openssl rsa -in server.key.org -out server.key
+  openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+
+  keytool -trustcacerts -import -alias jenkins.grml.org -keystore \
+          /etc/ssl/certs/java/cacerts -storepass changeit -file /etc/nginx/ssl/server.crt
+
+  /etc/init.d/nginx restart
 
 
