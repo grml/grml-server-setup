@@ -40,6 +40,7 @@ Jenkins plugins
   java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin disk-usage
   java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin ws-cleanup
   java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin sidebar-link
+  java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin locks-and-latches
   java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin grml-live.hpi
   /etc/init.d/jenkins restart
 
