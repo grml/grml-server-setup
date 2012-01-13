@@ -1,0 +1,21 @@
+We have 83.246.69.176/29 and 83.246.69.168/29
+
+83.246.69.168/29
+----------------
+
+83.246.69.169   ipmi
+83.246.69.170 	father.grml.org - kvm host
+83.246.69.171	mail.grml.org - mailsystem
+83.246.69.172	repos.grml.org - debian repos
+83.246.69.173	misc.grml.org - dns, and other stuff
+83.246.69.174	web.grml.org - webserver
+
+83.246.69.176/29
+----------------
+
+83.246.69.177	jenkins.grml.org - jenkins instance
+83.246.69.178
+83.246.69.179
+83.246.69.180
+83.246.69.181
+83.246.69.182
