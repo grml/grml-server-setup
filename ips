@@ -8,7 +8,7 @@ Reverse dns is done via mail to hostway (support@hostway.de)
 83.246.69.169   ipmi
 83.246.69.170 	father.grml.org - kvm host
 83.246.69.171	mail.grml.org - mailsystem
-83.246.69.172	repos.grml.org - debian repos
+83.246.69.172	repos.grml.org - git repos
 83.246.69.173	misc.grml.org - dns, and other stuff
 83.246.69.174	web.grml.org - webserver
 
