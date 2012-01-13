@@ -1,7 +1,8 @@
 We have 83.246.69.176/29 and 83.246.69.168/29.
 
 IPv6: 2a02:0790:1:12::1/64
-Reverse dns is done via mail to hostway (support@hostway.de)
+Reverse dns for IPv4 is done via mail to hostway (support@hostway.de)
+We handle reverse dns for IPv6 ourselfs.
 
 83.246.69.168/29
 ----------------
