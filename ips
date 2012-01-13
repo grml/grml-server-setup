@@ -1,10 +1,12 @@
 We have 83.246.69.176/29 and 83.246.69.168/29.
 
+IPv6: 2a02:0790:1:12::1/64
 Reverse dns is done via mail to hostway (support@hostway.de)
 
 83.246.69.168/29
 ----------------
 
+83.246.69.169	router
 83.246.69.170 	father.grml.org - kvm host
 83.246.69.171	mail.grml.org - mailsystem
 83.246.69.172	repos.grml.org - debian repos
@@ -20,3 +22,13 @@ Reverse dns is done via mail to hostway (support@hostway.de)
 83.246.69.180
 83.246.69.181
 83.246.69.182   grandfather.grmlorg - ipmi interface
+
+
+2a02:0790:1:12::1/64
+---------------------
+2a02:0790:1:12::1   router
+2a02:0790:1:12::2   father.grml.org
+2a02:0790:1:12::3   mail.grml.org
+2a02:0790:1:12::4   repos.grml.org
+2a02:0790:1:12::5   misc.grml.org
+2a02:0790:1:12::6   web.grml.org
