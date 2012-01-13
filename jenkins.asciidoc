@@ -1,0 +1,17 @@
+jenkins.grml.org documentation
+==============================
+Grml team <info@grml.org>
+v0.0, July 2011
+
+Installation
+------------
+
+  cat > /etc/apt/sources.list.d/jenkins.list << EOF
+  deb http://pkg.jenkins-ci.org/debian binary/
+  EOF
+
+  wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
+  apt-get update
+  apt-get install jenkins
+
+
