@@ -143,3 +143,8 @@ SSL-Setup:
   /etc/init.d/nginx restart
 
 
+grml-live Jenkins job setup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  apt-get install grml-live grml-live-addons grml-live-db syslinux
+
