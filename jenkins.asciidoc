@@ -178,3 +178,29 @@ Debian package build jobs setup
 
   apt-get install lintian build-essential quilt scons pristine-tar
 
+To get support for features like '[linux-any]' in Build-Depends update
+cowbuilder & CO to Debian/wheezy:
+
+  cat > /etc/apt/sources.list.d/wheezy.list << EOF
+  deb http://mirror.siteprotect.eu/debian/ wheezy main contrib non-free
+  EOF
+
+  cat > /etc/apt/preferences.d/wheezy << EOF
+  Package: *
+  Pin: release o=Debian,a=testing,n=wheezy
+  Pin-Priority: 50
+
+  Package: cowbuilder
+  Pin: release o=Debian,a=testing,n=wheezy
+  Pin-Priority: 500
+
+  Package: cowdancer
+  Pin: release o=Debian,a=testing,n=wheezy
+  Pin-Priority: 500
+
+  Package: pbuilder
+  Pin: release o=Debian,a=testing,n=wheezy
+  Pin-Priority: 500
+  EOF
+
+  apt-get update ; apt-get upgrade
