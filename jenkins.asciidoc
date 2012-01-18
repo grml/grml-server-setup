@@ -176,5 +176,5 @@ grml-live Jenkins job setup
 Debian package build jobs setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  apt-get install lintian build-essential quilt
+  apt-get install lintian build-essential quilt scons pristine-tar
 
