@@ -173,6 +173,11 @@ grml-live Jenkins job setup
   jenkins ALL=NOPASSWD: /usr/sbin/grml-live, /usr/sbin/grml2iso, /usr/bin/isohybrid
   jenkins ALL=NOPASSWD: /srv/release-tools/jenkins-link_latest.sh, /srv/release-tools/install-grml-live, /srv/release-tools/install-grml2usb
 
+Install dnsmasq to not get a copy of /etc/resolv.conf from the host inside the
+build chroots but instead query the host:
+
+  apt-get install dnsmasq
+
 Debian package build jobs setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
