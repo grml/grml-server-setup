@@ -46,7 +46,7 @@ Gateway: 77.95.228.125
 Netmask: 255.255.255.0
 
 77.95.228.50 - ipmi
-77.95.228.51 - klau.sgrml.org
+77.95.228.51 - klaus.grml.org
 
 77.95.228.18 - jenkins.grml.org
 77.95.228.19
