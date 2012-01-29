@@ -1,3 +1,6 @@
+Hostway
+=========
+
 We have 83.246.69.176/29 and 83.246.69.168/29.
 
 IPv6: 2a02:0790:1:12::1/64
@@ -19,7 +22,7 @@ We handle reverse dns for IPv6 ourselfs.
 
 83.246.69.177	router
 83.246.69.178   deb.grml.org
-83.246.69.179   jenkins.grml.org - jenkins instance
+83.246.69.179
 83.246.69.180
 83.246.69.181
 83.246.69.182   grandfather.grmlorg - ipmi interface
@@ -33,3 +36,24 @@ We handle reverse dns for IPv6 ourselfs.
 2a02:0790:1:12::4   repos.grml.org
 2a02:0790:1:12::5   misc.grml.org
 2a02:0790:1:12::6   web.grml.org
+
+
+SnelServer
+==========
+
+Nameserver: 89.207.128.252 89.207.130.252 89.207.132.252
+Gateway: 77.95.228.125
+Netmask: 255.255.255.0
+
+77.95.228.50 - ipmi
+77.95.228.51 - klau.sgrml.org
+
+77.95.228.18 - jenkins.grml.org
+77.95.228.19
+
+77.95.228.125
+77.95.228.126
+77.95.228.127
+77.95.228.128
+77.95.228.129
+
