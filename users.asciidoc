@@ -7,6 +7,7 @@ Remove a Grml Developer
 - Remove user from ldap (on father.grml.org) with ++cpu userdel USERNAME++
 - Remove IRC cloak (contact RichiH/mika)
 - Remove Email addresses if requested (mail.grml.org) -  ++/etc/postfix/virtual++
+- Remove upload rights to Grml repository
 - Remove access rights from git.grml.org (checkout ++gitolite-admin.git++ and edit ++conf/gitolite.conf++). At the moment mika and mru are admins for the gitolite repository
 
 - Remove account for the following services:
@@ -15,8 +16,15 @@ Remove a Grml Developer
          * grml.titanpad.com
          * Githubs Grml group
          * jenkins.grml.org
+         * stats.grml.org - admin is mika
          * planet.grml.org / remove blog if existent
 
+- Change passwords of the following services (if password was known):
+         * twitter.com/grml-project
+         * identi.ca/grml
+
+- Ensure no services depend on user like for example
+         * feedburner
 
 GSA members
 ~~~~~~~~~~~
