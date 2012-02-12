@@ -22,7 +22,7 @@ We handle reverse dns for IPv6 ourselfs.
 
 83.246.69.177	router
 83.246.69.178   deb.grml.org
-83.246.69.179
+83.246.69.179   foreman.grml.org
 83.246.69.180
 83.246.69.181
 83.246.69.182   grandfather.grmlorg - ipmi interface
