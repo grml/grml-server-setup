@@ -48,3 +48,5 @@ ssh_authorized_key{"mru":
 
 - Remove user from hostway access - send an email with your access password to support@hostway.de
 - Change password for other server access panels like snelserver
+- Remove user from encrypted password file
+- Change *all* documented passwords
