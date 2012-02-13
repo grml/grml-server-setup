@@ -1,4 +1,4 @@
-User managment
+User management
 ==============
 
 Remove a Grml Developer
