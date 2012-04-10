@@ -9,6 +9,10 @@ Remove a Grml Developer
 - Remove Email addresses if requested (mail.grml.org) -  ++/etc/postfix/virtual++
 - Remove upload rights to Grml repository
 - Remove access rights from git.grml.org (checkout ++gitolite-admin.git++ and edit ++conf/gitolite.conf++). At the moment mika and mru are admins for the gitolite repository
+- Remove email address from Uploaders field for Grml package in debian like:
+         * grml2usb
+         * grml-debootstrap
+         * grml-rescueboot
 
 - Remove account for the following services:
          * blog.grml.org
@@ -18,6 +22,7 @@ Remove a Grml Developer
          * jenkins.grml.org
          * stats.grml.org - admin is mika
          * planet.grml.org / remove blog if existent
+         * foreman.grml.org
 
 - Change passwords of the following services (if password was known):
          * twitter.com/grml-project
@@ -25,6 +30,9 @@ Remove a Grml Developer
 
 - Ensure no services depend on user like for example
          * feedburner
+         * ssh key to mirror git.grml.org to github/grml/
+
+- Update team page
 
 GSA members
 ~~~~~~~~~~~
