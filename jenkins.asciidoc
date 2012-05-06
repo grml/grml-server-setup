@@ -209,3 +209,23 @@ cowbuilder & CO to Debian/wheezy:
   EOF
 
   apt-get update ; apt-get upgrade
+
+
+How to extend a partition on LVM in LVM
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The safe approach:
+
+  klaus:   shutdown jenkins
+  klaus:   lvextend -L+5G /dev/mapper/vg0-jenkins--system
+  klaus:   virsh start jenkins
+  jenkins: create new partition in free space
+  jenkins: reboot
+  jenkins: pvcreate /dev/vda3
+  jenkins: vgextend jenkins /dev/vda3
+  jenkins: lvextend -L+3G /dev/jenkins/root
+  jenkins: resize2fs /dev/jenkins/root
+
+Or instead of creating the new partition use parted to note the partition start,
+then delete the partition and re-create it with previous partition start and new
+partition end.
