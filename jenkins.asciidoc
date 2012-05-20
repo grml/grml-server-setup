@@ -166,7 +166,7 @@ SSL-Setup:
 grml-live Jenkins job setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  apt-get install grml-live grml-live-addons grml-live-db syslinux
+  apt-get install grml-live grml-live-addons grml-live-db syslinux imagemagick ipxe
 
   visudo # add ->
   jenkins ALL=NOPASSWD: /usr/sbin/cowbuilder, /usr/sbin/chroot
