@@ -1,0 +1,60 @@
+User management
+==============
+
+Remove a Grml Developer
+-----------------------
+
+- Remove user from ldap (on father.grml.org) with ++cpu userdel USERNAME++
+- Remove IRC cloak (contact RichiH/mika)
+- Remove Email addresses if requested (mail.grml.org) -  ++/etc/postfix/virtual++
+- Remove upload rights to Grml repository
+- Remove access rights from git.grml.org (checkout ++gitolite-admin.git++ and edit ++conf/gitolite.conf++). At the moment mika and mru are admins for the gitolite repository
+- Remove email address from Uploaders field for Grml package in debian like:
+         * grml2usb
+         * grml-debootstrap
+         * grml-rescueboot
+
+- Remove account for the following services:
+         * blog.grml.org
+         * wiki.grml.org / adjust ACLs
+         * grml.titanpad.com
+         * Githubs Grml group
+         * jenkins.grml.org
+         * stats.grml.org - admin is mika
+         * planet.grml.org / remove blog if existent
+         * foreman.grml.org
+
+- Change passwords of the following services (if password was known):
+         * twitter.com/grml-project
+         * identi.ca/grml
+
+- Ensure no services depend on user like for example
+         * feedburner
+         * ssh key to mirror git.grml.org to github/grml/
+
+- Update team page
+
+GSA members
+~~~~~~~~~~~
+
+- If ssh key was defined in puppet config ensure that the key is absent. Please note the ensure => absent line
+
+--------------------------
+ssh_authorized_key{"mru":
+      user => 'mru',
+      key => 'some-key',
+      ensure => absent,
+      type   => "dsa",
+}
+--------------------------
+- Remove IPMI access for father.grml.org
+--------------------------
+# ipmi user list
+# ipmi user disable $ACCOUNT_NR
+# ipmi user set name ""
+--------------------------
+
+- Remove user from hostway access - send an email with your access password to support@hostway.de
+- Change password for other server access panels like snelserver
+- Remove user from encrypted password file
+- Change *all* documented passwords

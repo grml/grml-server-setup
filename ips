@@ -1,11 +1,16 @@
+Hostway
+=======
+
 We have 83.246.69.176/29 and 83.246.69.168/29.
 
-Reverse dns is done via mail to hostway (support@hostway.de)
+IPv6: 2a02:0790:1:12::1/64
+Reverse dns for IPv4 is done via mail to hostway (support@hostway.de)
+We handle reverse dns for IPv6 ourselfs.
 
 83.246.69.168/29
 ----------------
 
-83.246.69.169   ipmi
+83.246.69.169	router
 83.246.69.170 	father.grml.org - kvm host
 83.246.69.171	mail.grml.org - mailsystem
 83.246.69.172	repos.grml.org - git repos
@@ -15,9 +20,48 @@ Reverse dns is done via mail to hostway (support@hostway.de)
 83.246.69.176/29
 ----------------
 
-83.246.69.177	jenkins.grml.org - jenkins instance
-83.246.69.178
-83.246.69.179
+83.246.69.177	router
+83.246.69.178   deb.grml.org
+83.246.69.179   foreman.grml.org
 83.246.69.180
 83.246.69.181
 83.246.69.182   grandfather.grmlorg - ipmi interface
+
+
+2a02:0790:1:12::1/64
+---------------------
+2a02:0790:1:12::1   router
+2a02:0790:1:12::2   father.grml.org
+2a02:0790:1:12::3   mail.grml.org
+2a02:0790:1:12::4   repos.grml.org
+2a02:0790:1:12::5   misc.grml.org
+2a02:0790:1:12::6   web.grml.org
+
+
+SnelServer
+==========
+
+Nameserver: 89.207.128.252 89.207.130.252 89.207.132.252
+Gateway: 77.95.228.125
+Netmask: 255.255.255.0
+
+77.95.228.50 - ipmi
+77.95.228.51 - klaus.grml.org
+
+77.95.228.18 - jenkins.grml.org
+77.95.228.19 - backup.grml.org
+
+77.95.228.125 - blog.grml.org
+77.95.228.126
+77.95.228.127
+77.95.228.128
+77.95.228.129
+
+2a00:7b80:3012:12::1/64
+------------------------
+Gateway 2a00:7b80:3012::1
+Nameserver #1   2a00:7b80:3003:1::1
+Nameserver #2   2a00:7b80:450:1::1
+
+2a00:7b80:3012:12::1 - klaus.grml.org
+2a00:7b80:3012:12::2 - jenkins.grml.org
