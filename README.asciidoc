@@ -483,6 +483,16 @@ currently located on web.grml.org. bttrack is supervised by supervisor
 (http://supervisord.org/) see `/etc/supervisor/conf.d/btracker.conf` for the
 current configuration. transmission-daemon is started from it's init script.
 
+If you remove some isos check `/home/tracker/torrents` for broken symlinks. If 
+you removed something that was in `/home/tracker/torrents` clear the symlink and
+launch
+
+---------------------------------
+# supervisorctl restart bttrack 
+--------------------------------
+
+afterwards.
+
 Both use `/home/tracker/torrents/` as sourcedir for torrent seeding and allowed
 torrents in the tracker. This directory is filled with symlinks to the real
 files because of shortcomings in current BitTorrent software which limits
