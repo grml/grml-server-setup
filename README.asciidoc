@@ -515,6 +515,12 @@ to create a new torrent file call btmakemetafile:
 
 and replace grml32-full_2012.05.iso with your iso name. After you created the file link it to `/home/tracker/torrents/` and restart bttrack afterwards. 
 
+If you are to lazy to do it by hand try:
+
+-----------------------------------------------
+# /usr/local/bin/make_torrent /var/www/ftp-master.grml.org/grml96-full_2013.02.iso
+-----------------------------------------------
+
 mirrors
 -------
 
