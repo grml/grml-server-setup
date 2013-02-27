@@ -315,7 +315,7 @@ domain ip6 {
 	}
 }
 
-----------------------------------
+----------------------------------------------------------------------------------------------
 
 
 3ware tools
@@ -504,8 +504,14 @@ create a new torrentfile
 to create a new torrent file call btmakemetafile:
 
 -----------------------------------------------
- btmakemetafile http://ftp-master.grml.org:6969/announce /var/www/ftp-master.grml.org/grml32-full_2012.05.iso --target /var/www/ftp-master.grml.org/grml32-full_2012.05.iso.torrent --announce_list http://tracker.publicbt.com/announce,http://ftp-master.grml.org:6969/announce,udp://tracker.openbittorrent.com:80/announce,udp://tracker.publicbt.com:80/announce --httpseeds http://download.grml.org/grml32-full_2012.05.iso
- ---------------------------------------------
+ btmakemetafile http://ftp-master.grml.org:6969/announce \
+ /var/www/ftp-master.grml.org/grml32-full_2012.05.iso \
+ --target /var/www/ftp-master.grml.org/grml32-full_2012.05.iso.torrent \
+ --announce_list \
+ http://tracker.publicbt.com/announce,http://ftp-master.grml.org:6969/announce,udp://tracker.openbittorrent.com:80/announce,udp://tracker.publicbt.com:80/announce \
+ --httpseeds http://download.grml.org/grml32-full_2012.05.iso
+
+----------------------------------------------------------------------------------------------------------
 
 and replace grml32-full_2012.05.iso with your iso name. After you created the file link it to `/home/tracker/torrents/` and restart bttrack afterwards. 
 
