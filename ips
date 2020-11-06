@@ -36,6 +36,7 @@ We handle reverse dns for IPv6 ourselfs.
 2a02:0790:1:12::4   repos.grml.org
 2a02:0790:1:12::5   misc.grml.org
 2a02:0790:1:12::6   web.grml.org
+2a02:0790:1:12::7   deb.grml.org
 
 
 SnelServer
